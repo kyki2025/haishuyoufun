@@ -18,7 +18,9 @@ import {
   ExternalLink,
   Star,
   Coffee,
-  ArrowRight
+  ArrowRight,
+  Users,
+  Sparkles
 } from 'lucide-react';
 
 const aiTools = [
@@ -34,7 +36,8 @@ const aiTools = [
     url: "https://pdf.haishu.fun",
     featured: true,
     tags: ["PDF转换", "文档处理", "免费工具"],
-    features: ["多格式支持", "批量转换", "隐私保护", "无需注册"]
+    features: ["多格式支持", "批量转换", "隐私保护", "无需注册"],
+    status: "🔥 热门"
   },
   {
     id: 2,
@@ -48,7 +51,8 @@ const aiTools = [
     url: "http://6a198661e2af44eb9102f38f6e452cf4.ap-singapore.myide.io/",
     featured: true,
     tags: ["品茶记录", "茶文化", "生活分享"],
-    features: ["详细记录", "图片上传", "心得分享", "统计分析"]
+    features: ["详细记录", "图片上传", "心得分享", "统计分析"],
+    status: "✨ 最新"
   }
 ];
 
@@ -59,7 +63,10 @@ export default function AITools() {
         {/* 标题区域 */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Brain className="w-10 h-10 text-blue-600" />
+            <div className="relative">
+              <Brain className="w-10 h-10 text-blue-600" />
+              <Sparkles className="w-4 h-4 text-yellow-500 absolute -top-1 -right-1" />
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">AI工具箱</h2>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -72,14 +79,22 @@ export default function AITools() {
           {aiTools.map((tool) => (
             <Card 
               key={tool.id}
-              className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-2 border-gradient-to-r from-yellow-200 to-orange-200 bg-gradient-to-br from-white via-yellow-50 to-orange-50 overflow-hidden"
+              className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-2 border-gradient-to-r from-yellow-200 to-orange-200 bg-gradient-to-br from-white via-yellow-50 to-orange-50 overflow-hidden relative"
             >
+              {/* 状态标签 */}
+              <div className="absolute top-4 right-4 z-10">
+                <span className="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full font-semibold animate-pulse shadow-lg">
+                  {tool.status}
+                </span>
+              </div>
+
               <CardHeader className="pb-6 relative">
                 {/* 装饰背景 */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-yellow-200/30 to-orange-200/30 rounded-full -translate-y-6 translate-x-6"></div>
                 
-                <div className={`w-20 h-20 rounded-3xl bg-gradient-to-r ${tool.color} flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <div className={`w-20 h-20 rounded-3xl bg-gradient-to-r ${tool.color} flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg relative overflow-hidden`}>
                   {tool.icon}
+                  <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 
                 <div className="mb-4">
@@ -96,12 +111,15 @@ export default function AITools() {
                     <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-medium text-sm">
                       {tool.category}
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-4">
                       <div className="flex items-center gap-1 text-yellow-500">
                         <Star className="w-5 h-5 fill-current" />
                         <span className="text-lg font-bold text-gray-700">{tool.rating}</span>
                       </div>
-                      <span className="text-gray-500 text-sm">({tool.users} 用户)</span>
+                      <div className="flex items-center gap-1 text-blue-500">
+                        <Users className="w-4 h-4" />
+                        <span className="text-sm font-medium text-gray-600">{tool.users}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -114,11 +132,14 @@ export default function AITools() {
                 
                 {/* 功能特点 */}
                 <div className="mb-6">
-                  <h4 className="text-sm font-semibold text-gray-800 mb-3">核心功能：</h4>
+                  <h4 className="text-sm font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-blue-500" />
+                    核心功能：
+                  </h4>
                   <div className="grid grid-cols-2 gap-2">
                     {tool.features.map((feature, index) => (
                       <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
-                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <div className="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
                         {feature}
                       </div>
                     ))}
@@ -128,7 +149,7 @@ export default function AITools() {
                 {/* 标签 */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   {tool.tags.map((tag) => (
-                    <span key={tag} className="bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-medium">
+                    <span key={tag} className="bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-medium hover:from-blue-100 hover:to-purple-100 hover:text-blue-700 transition-all duration-300 cursor-default">
                       #{tag}
                     </span>
                   ))}
@@ -136,11 +157,28 @@ export default function AITools() {
                 
                 <Button 
                   size="lg"
-                  className="w-full bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
-                  onClick={() => tool.url ? window.open(tool.url, '_blank') : null}
+                  className="w-full bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg group relative overflow-hidden"
+                  onClick={() => {
+                    // 添加点击统计
+                    const clickData = {
+                      tool: tool.title,
+                      timestamp: new Date().toISOString(),
+                      action: 'tool_click'
+                    };
+                    const existingClicks = JSON.parse(localStorage.getItem('tool_clicks') || '[]');
+                    existingClicks.push(clickData);
+                    localStorage.setItem('tool_clicks', JSON.stringify(existingClicks));
+                    
+                    if (tool.url) {
+                      window.open(tool.url, '_blank');
+                    }
+                  }}
                 >
-                  立即体验我的作品
-                  <ExternalLink className="w-5 h-5 ml-2" />
+                  <span className="relative z-10 flex items-center justify-center">
+                    立即体验我的作品
+                    <ExternalLink className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                  <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Button>
               </CardContent>
             </Card>
@@ -152,10 +190,13 @@ export default function AITools() {
           <Link to="/ai-tools">
             <Button 
               size="lg"
-              className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 hover:from-blue-700 hover:via-purple-700 hover:to-blue-900 text-white font-semibold px-12 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 hover:from-blue-700 hover:via-purple-700 hover:to-blue-900 text-white font-semibold px-12 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg group relative overflow-hidden"
             >
-              了解工具详情
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <span className="relative z-10 flex items-center">
+                了解工具详情
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
           </Link>
         </div>
