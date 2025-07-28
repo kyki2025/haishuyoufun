@@ -1,0 +1,271 @@
+/**
+ * AI工具页面
+ * 展示完整的AI工具集合，支持分类和搜索
+ */
+import React, { useState } from 'react';
+import Navigation from '../components/Navigation';
+import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import Analytics from '../components/Analytics';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { 
+  Brain, 
+  MessageSquare, 
+  Image, 
+  FileText, 
+  Music, 
+  Video, 
+  Code, 
+  Palette,
+  ExternalLink,
+  Star,
+  Search,
+  Filter,
+  Coffee
+} from 'lucide-react';
+
+const aiTools = [
+  {
+    id: 1,
+    title: "海叔PDF转换器",
+    description: "专业的PDF与其他格式文件互转工具，支持PDF转Word、Excel、PPT等多种格式，操作简单，转换质量高，完全免费使用。",
+    icon: <FileText className="w-8 h-8" />,
+    category: "文档工具",
+    rating: 4.9,
+    users: "5k+",
+    color: "from-emerald-400 to-emerald-600",
+    url: "https://pdf.haishu.fun",
+    tags: ["PDF转换", "文档处理", "办公工具", "免费工具"],
+    featured: true,
+    details: {
+      features: [
+        "支持PDF转Word、Excel、PPT等格式",
+        "批量文件处理功能",
+        "保持原文档格式和布局",
+        "文件隐私保护，处理后自动删除",
+        "无需注册，完全免费使用",
+        "支持大文件处理"
+      ],
+      techStack: ["React", "Node.js", "PDF-lib"],
+      launchDate: "2024年1月",
+      github: "https://github.com/haishu"
+    }
+  },
+  {
+    id: 2,
+    title: "海叔品茶记录",
+    description: "专业的品茶信息记录和管理工具，帮助茶友记录每一次品茶体验，包含茶叶信息、品茶心得、图片记录等功能，是茶文化爱好者的必备工具。",
+    icon: <Coffee className="w-8 h-8" />,
+    category: "生活记录",
+    rating: 4.8,
+    users: "2k+",
+    color: "from-amber-400 to-orange-600",
+    url: "http://6a198661e2af44eb9102f38f6e452cf4.ap-singapore.myide.io/",
+    tags: ["品茶记录", "茶文化", "生活分享", "个人管理"],
+    featured: true,
+    details: {
+      features: [
+        "详细的茶叶信息记录",
+        "品茶心得和评分系统",
+        "图片上传和管理",
+        "品茶历史统计分析",
+        "分享功能和社交互动",
+        "个人品茶日历"
+      ],
+      techStack: ["Vue.js", "Express", "MongoDB"],
+      launchDate: "2024年3月",
+      github: "https://github.com/haishu"
+    }
+  }
+];
+
+const categories = ["全部", "文档工具", "生活记录"];
+
+export default function AIToolsPage() {
+  const [selectedCategory, setSelectedCategory] = useState("全部");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredTools = aiTools.filter(tool => {
+    const matchesCategory = selectedCategory === "全部" || tool.category === selectedCategory;
+    const matchesSearch = tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         tool.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         tool.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
+  const featuredTools = aiTools.filter(tool => tool.featured);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="pt-24 pb-12 px-4">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+            海叔的<span className="text-blue-600">原创工具</span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            亲手打造的实用工具，结合个人需求和用户反馈不断优化。每个工具都承载着海叔对技术和生活的理解。
+          </p>
+          
+          {/* Search and Filter */}
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Input
+                type="text"
+                placeholder="搜索AI工具..."
+                className="pl-10 pr-4 py-3 text-lg"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
+          
+          {/* Category Filter */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                onClick={() => setSelectedCategory(category)}
+                className={`rounded-full transition-all duration-300 ${
+                  selectedCategory === category 
+                    ? "bg-blue-600 hover:bg-blue-700" 
+                    : "bg-transparent hover:bg-blue-50"
+                }`}
+              >
+                <Filter className="w-4 h-4 mr-2" />
+                {category}
+              </Button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Tools */}
+      {selectedCategory === "全部" && (
+        <section className="py-12 px-4">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+              🚀 海叔原创作品
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredTools.map((tool) => (
+                <Card 
+                  key={tool.id}
+                  className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-yellow-200 bg-gradient-to-br from-yellow-50 to-white"
+                >
+                  <CardHeader className="pb-4">
+                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${tool.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      {tool.icon}
+                    </div>
+                    <div className="flex items-center justify-between mb-2">
+                      <CardTitle className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {tool.title}
+                      </CardTitle>
+                      <div className="flex items-center gap-1 text-yellow-500">
+                        <Star className="w-4 h-4 fill-current" />
+                        <span className="text-sm font-medium text-gray-700">{tool.rating}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-medium">
+                        {tool.category}
+                      </span>
+                      <span>{tool.users} 用户</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <CardDescription className="text-gray-600 mb-4 leading-relaxed">
+                      {tool.description}
+                    </CardDescription>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {tool.tags.map((tag) => (
+                        <span key={tag} className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <Button 
+                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300"
+                      onClick={() => window.open(tool.url, '_blank')}
+                    >
+                      立即使用
+                      <ExternalLink className="w-4 h-4 ml-2" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* All Tools */}
+      <section className="py-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-gray-900">
+              {selectedCategory === "全部" ? "所有工具" : `${selectedCategory}工具`}
+            </h2>
+            <span className="text-gray-600">
+              共 {filteredTools.length} 个工具
+            </span>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredTools.map((tool) => (
+              <Card 
+                key={tool.id}
+                className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <CardHeader className="pb-3">
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${tool.color} flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                    {tool.icon}
+                  </div>
+                  <CardTitle className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {tool.title}
+                  </CardTitle>
+                  <div className="flex items-center justify-between text-sm text-gray-500">
+                    <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
+                      {tool.category}
+                    </span>
+                    <div className="flex items-center gap-1 text-yellow-500">
+                      <Star className="w-3 h-3 fill-current" />
+                      <span>{tool.rating}</span>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <CardDescription className="text-gray-600 mb-4 text-sm leading-relaxed">
+                    {tool.description}
+                  </CardDescription>
+                  <Button 
+                    size="sm"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                    onClick={() => window.open(tool.url, '_blank')}
+                  >
+                    使用工具
+                    <ExternalLink className="w-3 h-3 ml-2" />
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          {filteredTools.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">没有找到匹配的工具，试试其他关键词？</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
