@@ -32,7 +32,7 @@ export default function About() {
                 🎂 <span>50岁 · 永远年轻的心</span>
               </p>
               <p className="flex items-center justify-center lg:justify-start gap-2">
-                🌊 <span>名字带海，心向大海</span>
+                🌊 <span>面向大海，春暖花开</span>
               </p>
               <p className="flex items-center justify-center lg:justify-start gap-2">
                 🤖 <span>AI工具收集家</span>
