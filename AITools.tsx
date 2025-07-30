@@ -48,7 +48,7 @@ const aiTools = [
     rating: 4.8,
     users: "2k+",
     color: "from-amber-400 to-orange-600",
-    url: "http://6a198661e2af44eb9102f38f6e452cf4.ap-singapore.myide.io/",
+    url: "https://tea.haishu.fun",
     featured: true,
     tags: ["品茶记录", "茶文化", "生活分享"],
     features: ["详细记录", "图片上传", "心得分享", "统计分析"],

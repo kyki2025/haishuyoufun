@@ -18,7 +18,7 @@ const interests = [
     posts: 48,
     category: "生活美学",
     hasApp: true,
-    appUrl: "http://6a198661e2af44eb9102f38f6e452cf4.ap-singapore.myide.io/"
+    appUrl: "https://tea.haishu.fun"
   },
   {
     id: 2,
