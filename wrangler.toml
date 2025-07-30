@@ -1,6 +1,6 @@
 name = "haishuyoufun"
 type = "webpack"
-account_id = "yunhairichu@gmail.com" # 请替换为您的Cloudflare账户ID
+account_id = "" # 请在此处填入您的Cloudflare账户ID（不是电子邮件地址）
 workers_dev = true
 route = ""
 zone_id = ""
