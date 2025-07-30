@@ -38,7 +38,7 @@ export default function About() {
                 🤖 <span>AI工具收集家</span>
               </p>
               <p className="flex items-center justify-center lg:justify-start gap-2">
-                🍵 <span>茶文化爱好者</span> · <a href="https://tea.haishu.fun" className="text-blue-600 hover:underline">海叔品茶记录</a>
+                🍵 <span>茶文化爱好者</span>
               </p>
             </div>
             
