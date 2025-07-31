@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import { Helmet } from 'react-helmet';
 import Analytics from '../components/Analytics';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -125,7 +126,109 @@ export default function AIToolsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <SEO 
+        title="海叔有趣 - AI工具集合 | 免费实用工具"
+        description="海叔原创AI工具集合，包括PDF转换器、品茶记录、智能拼图工具等多种实用工具，完全免费使用。"
+        keywords="AI工具,PDF转换,品茶记录,智能拼图,免费工具,海叔有趣"
+      />
+      <Helmet>
+        {/* 基本元标签 */}
+        <meta name="author" content="海叔有趣" />
+        <meta name="robots" content="index, follow" />
+        <meta name="revisit-after" content="7 days" />
+        
+        {/* Open Graph 标签 */}
+        <meta property="og:title" content="海叔有趣 - AI工具集合 | 免费实用工具" />
+        <meta property="og:description" content="海叔原创AI工具集合，包括PDF转换器、品茶记录、智能拼图工具等多种实用工具，完全免费使用。" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://haishu.fun/ai-tools" />
+        <meta property="og:image" content="https://haishu.fun/images/og-image.jpg" />
+        <meta property="og:site_name" content="海叔有趣" />
+        
+        {/* Twitter 卡片 */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="海叔有趣 - AI工具集合 | 免费实用工具" />
+        <meta name="twitter:description" content="海叔原创AI工具集合，包括PDF转换器、品茶记录、智能拼图工具等多种实用工具，完全免费使用。" />
+        <meta name="twitter:image" content="https://haishu.fun/images/og-image.jpg" />
+        
+        {/* 结构化数据标记 - 软件应用集合 */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "ItemList",
+              "itemListElement": [
+                ${aiTools.map((tool, index) => `
+                  {
+                    "@type": "SoftwareApplication",
+                    "position": ${index + 1},
+                    "name": "${tool.title}",
+                    "description": "${tool.description}",
+                    "applicationCategory": "WebApplication",
+                    "operatingSystem": "Any",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "0",
+                      "priceCurrency": "CNY"
+                    },
+                    "aggregateRating": {
+                      "@type": "AggregateRating",
+                      "ratingValue": "${tool.rating}",
+                      "ratingCount": "${tool.users.replace('+', '')}"
+                    }
+                  }
+                `).join(',')}
+              ]
+            }
+          `}
+        </script>
+        
+        {/* 网站所有者信息 */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "海叔有趣",
+              "url": "https://haishu.fun",
+              "logo": "https://haishu.fun/images/logo.png",
+              "sameAs": [
+                "https://github.com/haishu"
+              ]
+            }
+          `}
+        </script>
+        
+        {/* 面包屑导航结构化数据 */}
+        <script type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "首页",
+                  "item": "https://haishu.fun"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "AI工具",
+                  "item": "https://haishu.fun/ai-tools"
+                }
+              ]
+            }
+          `}
+        </script>
+      </Helmet>
       <Navigation />
+      {/* 添加规范链接 */}
+      <Helmet>
+        <link rel="canonical" href="https://haishu.fun/ai-tools" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+      </Helmet>
       
       {/* Hero Section */}
       <section className="pt-24 pb-12 px-4">
@@ -174,9 +277,9 @@ export default function AIToolsPage() {
 
       {/* Featured Tools */}
       {selectedCategory === "全部" && (
-        <section className="py-12 px-4">
+        <section className="py-12 px-4" aria-labelledby="featured-tools-heading">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <h2 id="featured-tools-heading" className="text-3xl font-bold text-gray-900 mb-8 text-center">
               🚀 海叔原创作品
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -186,7 +289,12 @@ export default function AIToolsPage() {
                   className="group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-yellow-200 bg-gradient-to-br from-yellow-50 to-white"
                 >
                   <CardHeader className="pb-4">
-                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${tool.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <div 
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${tool.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}
+                      aria-hidden="true"
+                      role="img"
+                      aria-label={`${tool.title} 图标`}
+                    >
                       {tool.icon}
                     </div>
                     <div className="flex items-center justify-between mb-2">
@@ -218,10 +326,11 @@ export default function AIToolsPage() {
                     </div>
                     <Button 
                       className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300"
-                      onClick={() => window.open(tool.url, '_blank')}
+                      onClick={() => window.open(tool.url, '_blank', 'noopener noreferrer')}
+                      aria-label={`立即使用${tool.title}`}
                     >
                       立即使用
-                      <ExternalLink className="w-4 h-4 ml-2" />
+                      <ExternalLink className="w-4 h-4 ml-2" aria-hidden="true" />
                     </Button>
                   </CardContent>
                 </Card>
@@ -232,10 +341,10 @@ export default function AIToolsPage() {
       )}
 
       {/* All Tools */}
-      <section className="py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-gray-900">
+      <section className="py-12 px-4" aria-labelledby="all-tools-heading">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-between mb-8">
+              <h2 id="all-tools-heading" className="text-3xl font-bold text-gray-900">
               {selectedCategory === "全部" ? "所有工具" : `${selectedCategory}工具`}
             </h2>
             <span className="text-gray-600">
@@ -250,7 +359,12 @@ export default function AIToolsPage() {
                 className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
                 <CardHeader className="pb-3">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${tool.color} flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                  <div 
+                    className={`w-12 h-12 rounded-xl bg-gradient-to-r ${tool.color} flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform duration-300`}
+                    aria-hidden="true"
+                    role="img"
+                    aria-label={`${tool.title} 图标`}
+                  >
                     {tool.icon}
                   </div>
                   <CardTitle className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
@@ -273,10 +387,11 @@ export default function AIToolsPage() {
                   <Button 
                     size="sm"
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-                    onClick={() => window.open(tool.url, '_blank')}
+                    onClick={() => window.open(tool.url, '_blank', 'noopener noreferrer')}
+                    aria-label={`使用${tool.title}工具`}
                   >
                     使用工具
-                    <ExternalLink className="w-3 h-3 ml-2" />
+                    <ExternalLink className="w-3 h-3 ml-2" aria-hidden="true" />
                   </Button>
                 </CardContent>
               </Card>
