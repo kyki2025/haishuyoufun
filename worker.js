@@ -6,15 +6,15 @@
 import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
 
 addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request));
+  event.respondWith(handleRequest(event));
 });
 
 /**
  * 处理所有传入的请求
- * @param {Request} request
+ * @param {FetchEvent} event
  * @returns {Response}
  */
-async function handleRequest(request) {
+async function handleRequest(event) {
   const options = {};
 
   try {
