@@ -53,6 +53,21 @@ const aiTools = [
     tags: ["品茶记录", "茶文化", "生活分享"],
     features: ["详细记录", "图片上传", "心得分享", "统计分析"],
     status: "✨ 最新"
+  },
+  {
+    id: 3,
+    title: "海叔智能拼图工具",
+    description: "智能图片拼接和布局工具，上传图片，智能推荐布局，创意模板，滤镜美化，一键生成平台适配的拼贴作品",
+    icon: <Image className="w-8 h-8" />,
+    category: "图片工具",
+    rating: 4.7,
+    users: "3k+",
+    color: "from-purple-400 to-pink-600",
+    url: "https://mergepics.haishu.fun",
+    featured: true,
+    tags: ["图片拼接", "智能布局", "创意设计"],
+    features: ["智能推荐", "创意模板", "滤镜美化", "平台适配"],
+    status: "🎨 创意"
   }
 ];
 
@@ -75,7 +90,7 @@ export default function AITools() {
         </div>
         
         {/* 工具展示 - 突出个人作品 */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {aiTools.map((tool) => (
             <Card 
               key={tool.id}
