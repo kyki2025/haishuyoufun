@@ -78,10 +78,36 @@ const aiTools = [
       launchDate: "2024年3月",
       github: "https://github.com/haishu"
     }
+  },
+  {
+    id: 3,
+    title: "海叔智能拼图工具",
+    description: "智能图片拼接和布局工具，上传图片，智能推荐布局，创意模板，滤镜美化，一键生成平台适配的拼贴作品，让您的图片创作更加简单高效。",
+    icon: <Image className="w-8 h-8" />,
+    category: "图片工具",
+    rating: 4.7,
+    users: "3k+",
+    color: "from-purple-400 to-pink-600",
+    url: "https://mergepics.haishu.fun",
+    tags: ["图片拼接", "智能布局", "创意设计", "图片处理"],
+    featured: true,
+    details: {
+      features: [
+        "智能推荐最佳布局方案",
+        "丰富的创意模板库",
+        "专业滤镜和美化效果",
+        "多平台尺寸适配",
+        "批量图片处理",
+        "一键导出高清作品"
+      ],
+      techStack: ["React", "Canvas API", "AI算法"],
+      launchDate: "2024年5月",
+      github: "https://github.com/haishu"
+    }
   }
 ];
 
-const categories = ["全部", "文档工具", "生活记录"];
+const categories = ["全部", "文档工具", "生活记录", "图片工具"];
 
 export default function AIToolsPage() {
   const [selectedCategory, setSelectedCategory] = useState("全部");
