@@ -82,7 +82,7 @@ const aiTools = [
   {
     id: 3,
     title: "海叔智能拼图工具",
-    description: "智能拼图工具，上传图片，智能推荐布局，模板，滤镜美化，一键生成平台适配的拼贴作品。",
+    description: "智能拼图工具，上传图片，智能推荐布局，模板，滤镜美化，一键生成平台适配的拼贴作品。支持多种图片格式，提供丰富的创意模板库，专业的滤镜和美化效果，让您轻松创作出精美的拼贴作品。",
     icon: <Image className="w-8 h-8" />,
     category: "图片工具",
     rating: 4.7,
@@ -206,9 +206,9 @@ export default function AIToolsPage() {
                     </div>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <CardDescription className="text-gray-600 mb-4 leading-relaxed">
-                      {tool.description}
-                    </CardDescription>
+                  <CardDescription className="text-gray-600 mb-4 leading-relaxed h-24 overflow-hidden">
+                    {tool.description}
+                  </CardDescription>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {tool.tags.map((tag) => (
                         <span key={tag} className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
@@ -267,7 +267,7 @@ export default function AIToolsPage() {
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <CardDescription className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  <CardDescription className="text-gray-600 mb-4 text-sm leading-relaxed h-16 overflow-hidden line-clamp-3">
                     {tool.description}
                   </CardDescription>
                   <Button 
