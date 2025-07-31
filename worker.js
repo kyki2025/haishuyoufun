@@ -28,7 +28,7 @@ async function handleRequest(event) {
     response.headers.set('X-Content-Type-Options', 'nosniff');
     response.headers.set('X-Frame-Options', 'DENY');
     response.headers.set('Referrer-Policy', 'unsafe-url');
-    response.headers.set('Feature-Policy', 'none');
+    // 移除无效的 Feature-Policy 设置
 
     return response;
 
