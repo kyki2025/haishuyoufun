@@ -105,6 +105,32 @@ const aiTools = [
       launchDate: "2024年5月",
       github: "https://github.com/haishu"
     }
+  },
+  {
+    id: 4,
+    title: "海叔美食分享",
+    description: "专业的美食记录和分享平台，帮助美食爱好者记录每一次美食体验，包含菜品信息、制作过程、口味评价等功能，支持图片上传和社交分享，是美食爱好者的必备工具。",
+    icon: <Coffee className="w-8 h-8" />,
+    category: "生活记录",
+    rating: 4.8,
+    users: "1.5k+",
+    color: "from-red-400 to-orange-600",
+    url: "https://food.haishu.fun",
+    tags: ["美食记录", "菜谱分享", "生活分享", "社交互动"],
+    featured: true,
+    details: {
+      features: [
+        "详细的菜品信息记录",
+        "制作过程步骤记录",
+        "口味评分和点评系统",
+        "高清美食图片上传",
+        "菜谱收藏和分享功能",
+        "美食地图和推荐"
+      ],
+      techStack: ["React", "Node.js", "MongoDB"],
+      launchDate: "2024年6月",
+      github: "https://github.com/haishu"
+    }
   }
 ];
 
