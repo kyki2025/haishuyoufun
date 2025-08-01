@@ -371,7 +371,7 @@ export default function AIToolsPage() {
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <h2 id="all-tools-heading" className="text-3xl font-bold text-gray-900">
-              {selectedCategory === "全部" ? "所有工具" : `${selectedCategory}工具`}
+              {selectedCategory === "全部" ? "更多工具" : `${selectedCategory}工具`}
             </h2>
             <span className="text-gray-600">
               共 {filteredTools.length} 个工具
