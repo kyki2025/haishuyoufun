@@ -24,7 +24,8 @@ import {
   Star,
   Search,
   Filter,
-  Coffee
+  Coffee,
+  UtensilsCrossed
 } from 'lucide-react';
 
 const aiTools = [
@@ -110,7 +111,7 @@ const aiTools = [
     id: 4,
     title: "海叔美食分享",
     description: "专业的美食记录和分享平台，帮助美食爱好者记录每一次美食体验，包含菜品信息、制作过程、口味评价等功能，支持图片上传和社交分享，是美食爱好者的必备工具。",
-    icon: <Coffee className="w-8 h-8" />,
+    icon: <UtensilsCrossed className="w-8 h-8" />,
     category: "生活记录",
     rating: 4.8,
     users: "1.5k+",
