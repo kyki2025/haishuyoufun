@@ -3,11 +3,31 @@ import { rimraf } from 'rimraf'
 import stylePlugin from 'esbuild-style-plugin'
 import autoprefixer from 'autoprefixer'
 import tailwindcss from 'tailwindcss'
+import { copyFileSync, existsSync, mkdirSync } from 'fs'
+import { join } from 'path'
 
 const args = process.argv.slice(2)
 const isProd = args[0] === '--production'
 
 await rimraf('dist')
+
+// 确保 dist 目录存在
+if (!existsSync('dist')) {
+  mkdirSync('dist', { recursive: true })
+}
+
+// 复制 public 目录下的静态文件
+const publicFiles = ['sitemap.xml', 'robots.txt']
+publicFiles.forEach(file => {
+  const srcPath = join('public', file)
+  const destPath = join('dist', file)
+  if (existsSync(srcPath)) {
+    copyFileSync(srcPath, destPath)
+    console.log(`✅ 复制 ${file} 到 dist 目录`)
+  } else {
+    console.warn(`⚠️  文件不存在: ${srcPath}`)
+  }
+})
 
 /**
  * @type {esbuild.BuildOptions}
