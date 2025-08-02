@@ -5,7 +5,9 @@
     "dev": "node scripts/build.mjs",
     "build": "node scripts/build.mjs --production",
     "deploy": "wrangler deploy",
-    "dev:worker": "wrangler dev"
+    "dev:worker": "wrangler dev",
+    "generate-sitemap": "node scripts/generate-sitemap.js",
+    "prebuild": "npm run generate-sitemap"
   },
   "dependencies": {
     "@cloudflare/kv-asset-handler": "^0.4.0",
