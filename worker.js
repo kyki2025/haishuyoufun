@@ -15,6 +15,34 @@ addEventListener('fetch', event => {
  * @returns {Response}
  */
 async function handleRequest(event) {
+  const url = new URL(event.request.url);
+  const pathname = url.pathname;
+
+  // 特殊处理 sitemap.xml 和 robots.txt
+  if (pathname === '/sitemap.xml' || pathname === '/robots.txt') {
+    try {
+      const response = await getAssetFromKV(event, {
+        mapRequestToAsset: req => new Request(`${url.origin}${pathname}`, req),
+      });
+      
+      // 设置正确的 Content-Type
+      const contentType = pathname === '/sitemap.xml' ? 'application/xml' : 'text/plain';
+      const newResponse = new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: {
+          ...response.headers,
+          'Content-Type': contentType,
+          'Cache-Control': 'public, max-age=3600', // 缓存1小时
+        }
+      });
+      
+      return newResponse;
+    } catch (e) {
+      return new Response(`File not found: ${pathname}`, { status: 404 });
+    }
+  }
+
   const options = {};
 
   try {
@@ -28,15 +56,28 @@ async function handleRequest(event) {
     response.headers.set('X-Content-Type-Options', 'nosniff');
     response.headers.set('X-Frame-Options', 'DENY');
     response.headers.set('Referrer-Policy', 'unsafe-url');
-    // 移除无效的 Feature-Policy 设置
+    
+    // 为静态文件设置正确的 Content-Type
+    const contentType = getContentType(pathname);
+    if (contentType) {
+      response.headers.set('Content-Type', contentType);
+    }
 
     return response;
 
   } catch (e) {
-    // 如果资源不存在，返回 index.html（用于 SPA 路由）
+    // 只有在访问页面路由时才返回 index.html（用于 SPA 路由）
+    // 排除静态文件扩展名
+    const staticExtensions = ['.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot', '.otf', '.pdf'];
+    const isStaticFile = staticExtensions.some(ext => pathname.endsWith(ext));
+    
+    if (isStaticFile) {
+      return new Response('File not found', { status: 404 });
+    }
+    
     try {
       let notFoundResponse = await getAssetFromKV(event, {
-        mapRequestToAsset: req => new Request(`${new URL(req.url).origin}/index.html`, req),
+        mapRequestToAsset: req => new Request(`${url.origin}/index.html`, req),
       });
 
       return new Response(notFoundResponse.body, { 
@@ -65,6 +106,7 @@ function getContentType(path) {
     'css': 'text/css',
     'js': 'application/javascript',
     'json': 'application/json',
+    'xml': 'application/xml',
     'png': 'image/png',
     'jpg': 'image/jpeg',
     'jpeg': 'image/jpeg',
