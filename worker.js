@@ -58,7 +58,13 @@ async function handleRequest(event) {
     response.headers.set('Referrer-Policy', 'unsafe-url');
     
     // 为静态文件设置正确的 Content-Type
-    const contentType = getContentType(pathname);
+    let contentType;
+    if (pathname === '/' || pathname === '/index.html') {
+      contentType = 'text/html';
+    } else {
+      contentType = getContentType(pathname);
+    }
+    
     if (contentType) {
       response.headers.set('Content-Type', contentType);
     }
