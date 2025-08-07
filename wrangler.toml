@@ -12,7 +12,7 @@ command = "npm run build"
 
 [env.production]
 name = "haishuyoufun-prod"
-routes = ["haishuyoufun.com/*", "www.haishuyoufun.com/*"]
+routes = ["haishu.fun/*", "www.haishu.fun/*"]
 
 # 如果您使用KV存储静态资源
 # [kv_namespaces]
