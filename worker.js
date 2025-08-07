@@ -18,6 +18,13 @@ async function handleRequest(event) {
   const url = new URL(event.request.url);
   const pathname = url.pathname;
 
+  // 处理 www 重定向 - 将 www.haishu.fun 重定向到 haishu.fun
+  if (url.hostname === 'www.haishu.fun') {
+    const redirectUrl = new URL(event.request.url);
+    redirectUrl.hostname = 'haishu.fun';
+    return Response.redirect(redirectUrl.toString(), 301);
+  }
+
   // 特殊处理 sitemap.xml 和 robots.txt
   if (pathname === '/sitemap.xml' || pathname === '/robots.txt') {
     try {
