@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import HomePage from './pages/Home'
 import AIToolsPage from './pages/AIToolsPage'
 import BlogPage from './pages/BlogPage'
@@ -10,7 +10,7 @@ import FeedbackWidget from './components/FeedbackWidget'
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <LoadingProgress />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -21,6 +21,6 @@ export default function App() {
       </Routes>
       <ScrollToTop />
       <FeedbackWidget />
-    </HashRouter>
+    </BrowserRouter>
   )
 }

@@ -1,0 +1,11 @@
+# SPA 路由回退
+/ai-tools /index.html 200
+/blog /index.html 200
+/blog/* /index.html 200
+/contact /index.html 200
+/about /index.html 200
+/life /index.html 200
+
+# 确保静态资源正确访问
+/sitemap.xml /sitemap.xml 200
+/robots.txt /robots.txt 200
