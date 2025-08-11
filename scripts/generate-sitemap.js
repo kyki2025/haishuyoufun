@@ -8,7 +8,8 @@ const path = require('path');
 
 // 网站基础信息
 const SITE_URL = 'https://haishu.fun';
-const CURRENT_DATE = new Date().toISOString().split('T')[0];
+// 使用完整的ISO日期格式，符合搜索引擎规范
+const CURRENT_DATE = new Date().toISOString();
 
 // 页面配置
 const pages = [
@@ -55,10 +56,7 @@ const tools = [
 // 生成sitemap XML内容
 function generateSitemap() {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 `;
 
   // 添加主要页面
