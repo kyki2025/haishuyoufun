@@ -29,6 +29,19 @@ publicFiles.forEach(file => {
   }
 })
 
+// 复制路由配置文件
+const configFiles = ['_redirects', '_routes.json']
+configFiles.forEach(file => {
+  const srcPath = file
+  const destPath = join('dist', file)
+  if (existsSync(srcPath)) {
+    copyFileSync(srcPath, destPath)
+    console.log(`✅ 复制 ${file} 到 dist 目录`)
+  } else {
+    console.warn(`⚠️  文件不存在: ${srcPath}`)
+  }
+})
+
 /**
  * @type {esbuild.BuildOptions}
  */

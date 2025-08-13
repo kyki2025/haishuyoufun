@@ -13,8 +13,7 @@ const PAGES_TO_CHECK = [
   '/',
   '/ai-tools', 
   '/blog',
-  '/contact',
-  '/about'
+  '/contact'
 ];
 
 const SPECIAL_FILES = [
