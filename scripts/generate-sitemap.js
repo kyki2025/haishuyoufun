@@ -26,7 +26,7 @@ const pages = [
     priority: '0.9'
   },
   {
-    url: '/life',
+    url: '/blog',
     lastmod: CURRENT_DATE,
     changefreq: 'weekly',
     priority: '0.8'

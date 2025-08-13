@@ -9,6 +9,7 @@
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "generate-static-pages": "node scripts/generate-static-pages.mjs",
     "validate-sitemap": "node scripts/validate-sitemap.js",
+    "validate-seo": "node scripts/validate-seo-status.js",
     "prebuild": "npm run generate-sitemap",
     "postbuild": "npm run generate-static-pages"
   },
