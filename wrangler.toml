@@ -7,12 +7,28 @@ main = "worker.js"
 [site]
 bucket = "./dist"
 
+# 添加静态文件处理规则
+[[rules]]
+type = "Text"
+globs = ["**/*.xml", "**/*.txt", "**/*.json"]
+fallthrough = true
+
 [build]
 command = "npm run build"
 
 [env.production]
 name = "haishuyoufun-prod"
 routes = ["haishu.fun/*", "www.haishu.fun/*"]
+
+# 确保生产环境也有正确的站点配置
+[env.production.site]
+bucket = "./dist"
+
+# 添加生产环境的静态文件处理规则
+[[env.production.rules]]
+type = "Text"
+globs = ["**/*.xml", "**/*.txt", "**/*.json"]
+fallthrough = true
 
 # 如果您使用KV存储静态资源
 # [kv_namespaces]
